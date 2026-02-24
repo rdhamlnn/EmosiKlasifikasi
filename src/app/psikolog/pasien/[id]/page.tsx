@@ -500,7 +500,7 @@ export default function PatientDetailPage({ params }: { params: Promise<{ id: st
                                         <ResponsiveContainer width="100%" height={250}>
                                             <PieChart>
                                                 <Pie data={pieData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={90}
-                                                    label={({ name, percent }: { name: string; percent: number }) => `${name} ${(percent * 100).toFixed(0)}%`}>
+                                                    label={(props: any) => `${props.name} ${(props.percent * 100).toFixed(0)}%`}>
                                                     {pieData.map((entry) => (
                                                         <Cell key={entry.name} fill={EMOTION_COLORS[entry.name] || "hsl(220,15%,55%)"} />
                                                     ))}
@@ -662,8 +662,8 @@ export default function PatientDetailPage({ params }: { params: Promise<{ id: st
                                                     >
                                                         <div
                                                             className={`max-w-[75%] rounded-2xl px-4 py-2.5 ${isMe
-                                                                    ? "bg-secondary text-white rounded-br-md"
-                                                                    : "bg-muted text-foreground rounded-bl-md"
+                                                                ? "bg-secondary text-white rounded-br-md"
+                                                                : "bg-muted text-foreground rounded-bl-md"
                                                                 }`}
                                                         >
                                                             <p className="text-sm leading-relaxed">{msg.message}</p>
