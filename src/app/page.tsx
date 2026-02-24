@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -12,43 +11,79 @@ import {
   Angry,
   AlertTriangle,
   Minus,
+  UserCircle,
+  Stethoscope,
+  BookOpen,
+  TrendingUp,
+  ShieldAlert,
+  MessageSquare,
+  FileText,
   FileInput,
   Filter,
   CheckCircle2,
+  Target,
 } from "lucide-react";
+
+const emotions = [
+  { icon: Smile, label: "Happy", color: "text-emerald-500" },
+  { icon: Frown, label: "Sad", color: "text-blue-500" },
+  { icon: Angry, label: "Angry", color: "text-red-500" },
+  { icon: AlertTriangle, label: "Fear", color: "text-purple-500" },
+  { icon: Minus, label: "Neutral", color: "text-gray-500" },
+];
 
 const features = [
   {
     icon: BrainCircuit,
     title: "Naive Bayes Classifier",
-    desc: "Algoritma probabilistik yang terbukti efektif untuk klasifikasi teks dengan akurasi tinggi.",
+    desc: "Algoritma probabilistik yang terbukti efektif untuk klasifikasi teks emosi dengan akurasi tinggi.",
   },
   {
     icon: BarChart3,
     title: "TF-IDF Feature Extraction",
-    desc: "Ekstraksi fitur otomatis yang mengukur kepentingan setiap kata dalam dokumen.",
+    desc: "Ekstraksi fitur otomatis yang mengukur kepentingan setiap kata dalam teks diary pasien.",
   },
   {
     icon: ShieldCheck,
-    title: "Explainable AI",
-    desc: "Setiap prediksi transparan dan dapat ditelusuri — bukan model black-box.",
+    title: "Monitoring Real-time",
+    desc: "Sistem deteksi otomatis untuk memantau kondisi emosional pasien dan memberikan peringatan dini.",
   },
 ];
 
-const emotions = [
-  { icon: Smile, label: "Happy", color: "text-secondary" },
-  { icon: Frown, label: "Sad", color: "text-primary" },
-  { icon: Angry, label: "Angry", color: "text-destructive" },
-  { icon: AlertTriangle, label: "Fear", color: "text-primary" },
-  { icon: Minus, label: "Neutral", color: "text-muted-foreground" },
+const patientFeatures = [
+  {
+    icon: BookOpen,
+    title: "Tulis Diary",
+    desc: "Ceritakan perasaan Anda kapan saja. Sistem akan menganalisis emosi secara otomatis.",
+  },
+  {
+    icon: TrendingUp,
+    title: "Tren Emosi",
+    desc: "Pantau perkembangan emosi Anda dari waktu ke waktu melalui grafik interaktif.",
+  },
+  {
+    icon: MessageSquare,
+    title: "Terima Feedback",
+    desc: "Dapatkan pesan dan saran langsung dari psikolog yang memantau Anda.",
+  },
 ];
 
-const steps = [
-  { icon: FileInput, label: "Input Teks" },
-  { icon: Filter, label: "Preprocessing" },
-  { icon: BarChart3, label: "TF-IDF" },
-  { icon: BrainCircuit, label: "Naive Bayes" },
-  { icon: CheckCircle2, label: "Hasil Emosi" },
+const psychologistFeatures = [
+  {
+    icon: ShieldAlert,
+    title: "Sistem Alert Otomatis",
+    desc: "Deteksi dini pasien berisiko dengan 3 level: Aman 🟢, Perlu Perhatian 🟡, Kritis 🔴.",
+  },
+  {
+    icon: BarChart3,
+    title: "Analisis Tren",
+    desc: "Pantau distribusi dan tren emosi setiap pasien dengan filter harian, mingguan, bulanan.",
+  },
+  {
+    icon: FileText,
+    title: "Laporan PDF",
+    desc: "Generate laporan profesional berisi ringkasan emosi, diary, dan catatan klinis.",
+  },
 ];
 
 export default function HomePage() {
@@ -58,49 +93,34 @@ export default function HomePage() {
       <section className="relative overflow-hidden py-20 md:py-28">
         <div className="pointer-events-none absolute inset-0 bg-hero-gradient opacity-[0.03]" />
         <div className="container mx-auto px-4">
-          <div className="grid items-center gap-12 lg:grid-cols-2">
-            <div className="space-y-6">
-              <div className="inline-block rounded-full border border-secondary/30 bg-accent px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-secondary">
-                Sistem Cerdas – Tugas Akhir
-              </div>
-              <h1 className="text-4xl font-bold leading-tight tracking-tight text-foreground md:text-5xl lg:text-6xl">
-                Sistem Klasifikasi Emosi{" "}
-                <span className="text-gradient">Pengguna Media Sosial</span>
-              </h1>
-              <p className="text-lg leading-relaxed text-muted-foreground md:text-xl">
-                Berbasis Web Menggunakan Metode{" "}
-                <span className="font-semibold text-foreground">Naive Bayes Classifier</span>{" "}
-                dengan fitur TF-IDF untuk ekstraksi fitur teks secara otomatis.
-              </p>
-              <p className="max-w-lg text-sm leading-relaxed text-muted-foreground">
-                Sistem ini dirancang untuk menganalisis dan mengklasifikasikan emosi dari
-                teks media sosial secara transparan dan dapat dijelaskan (explainable AI).
-              </p>
-              <div className="flex flex-wrap gap-3">
-                <Button
-                  size="lg"
-                  asChild
-                  className="bg-hero-gradient text-primary-foreground shadow-lg transition-all hover:opacity-90 hover:shadow-xl"
-                >
-                  <Link href="/klasifikasi">
-                    Mulai Analisis Emosi
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
-                <Button size="lg" variant="outline" asChild>
-                  <Link href="/tentang">Pelajari Sistem</Link>
-                </Button>
-              </div>
+          <div className="mx-auto max-w-3xl text-center">
+            <div className="mb-4 inline-block rounded-full border border-secondary/30 bg-accent px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-secondary">
+              Platform Monitoring Kesehatan Mental
             </div>
-            <div className="flex justify-center">
-              <Image
-                src="/hero-illustration.png"
-                alt="Ilustrasi jaringan emosi dan AI"
-                width={512}
-                height={512}
-                className="w-full max-w-lg rounded-2xl shadow-card"
-                priority
-              />
+            <h1 className="text-4xl font-bold leading-tight tracking-tight text-foreground md:text-5xl lg:text-6xl">
+              <span className="text-gradient">EmotionSense</span> AI
+            </h1>
+            <p className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-muted-foreground md:text-xl">
+              Platform monitoring kesehatan mental berbasis AI yang menghubungkan{" "}
+              <span className="font-semibold text-foreground">pasien</span> dan{" "}
+              <span className="font-semibold text-foreground">psikolog</span>{" "}
+              melalui analisis emosi otomatis dari diary harian.
+            </p>
+            <p className="mx-auto mt-3 max-w-lg text-sm text-muted-foreground">
+              Menggunakan metode Naive Bayes Classifier dengan fitur TF-IDF
+              untuk klasifikasi emosi teks secara transparan dan akurat.
+            </p>
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
+              <Button
+                size="lg"
+                asChild
+                className="bg-hero-gradient text-primary-foreground shadow-lg transition-all hover:opacity-90 hover:shadow-xl"
+              >
+                <Link href="/login">
+                  Mulai Sekarang
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
             </div>
           </div>
         </div>
@@ -110,27 +130,34 @@ export default function HomePage() {
       <section className="border-y bg-muted/30 py-12">
         <div className="container mx-auto px-4">
           <p className="mb-6 text-center text-sm font-medium uppercase tracking-wider text-muted-foreground">
-            5 Kelas Emosi yang Diklasifikasikan
+            5 Kelas Emosi yang Dianalisis Sistem
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4 md:gap-8">
             {emotions.map((e) => (
-              <div key={e.label} className="flex items-center gap-2 rounded-xl border border-border/50 bg-card px-5 py-3 shadow-sm transition-all hover:shadow-card">
+              <div
+                key={e.label}
+                className="flex items-center gap-2 rounded-xl border border-border/50 bg-card px-5 py-3 shadow-sm transition-all hover:shadow-card"
+              >
                 <e.icon className={`h-5 w-5 ${e.color}`} />
-                <span className="text-sm font-semibold text-foreground">{e.label}</span>
+                <span className="text-sm font-semibold text-foreground">
+                  {e.label}
+                </span>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Features */}
+      {/* Core Technology */}
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="mb-12 text-center">
-            <h2 className="text-3xl font-bold text-foreground md:text-4xl">Mengapa Sistem Ini?</h2>
+            <h2 className="text-3xl font-bold text-foreground md:text-4xl">
+              Teknologi di Balik Sistem
+            </h2>
             <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
-              Dibangun dengan pendekatan akademis dan metode yang teruji untuk menghasilkan
-              klasifikasi emosi yang akurat dan dapat dipertanggungjawabkan.
+              Dibangun dengan pendekatan akademis dan metode machine learning
+              yang teruji untuk menghasilkan klasifikasi emosi yang akurat.
             </p>
           </div>
           <div className="grid gap-6 md:grid-cols-3">
@@ -143,8 +170,12 @@ export default function HomePage() {
                   <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-accent text-secondary transition-colors group-hover:bg-hero-gradient group-hover:text-primary-foreground">
                     <f.icon className="h-6 w-6" />
                   </div>
-                  <h3 className="mb-2 text-lg font-semibold text-foreground">{f.title}</h3>
-                  <p className="text-sm leading-relaxed text-muted-foreground">{f.desc}</p>
+                  <h3 className="mb-2 text-lg font-semibold text-foreground">
+                    {f.title}
+                  </h3>
+                  <p className="text-sm leading-relaxed text-muted-foreground">
+                    {f.desc}
+                  </p>
                 </CardContent>
               </Card>
             ))}
@@ -152,31 +183,175 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Mini Process Flow */}
+      {/* Process Flow */}
       <section className="bg-muted/50 py-20">
         <div className="container mx-auto px-4">
           <div className="mb-12 text-center">
-            <h2 className="text-3xl font-bold text-foreground md:text-4xl">Alur Kerja Sistem</h2>
+            <h2 className="text-3xl font-bold text-foreground md:text-4xl">
+              Alur Kerja Sistem
+            </h2>
             <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
-              Dari input teks hingga hasil klasifikasi emosi dalam 5 langkah sederhana.
+              Dari teks diary pasien hingga hasil klasifikasi emosi dalam 5 langkah.
             </p>
           </div>
           <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center sm:gap-0">
-            {steps.map((step, i) => (
+            {[
+              { icon: FileInput, label: "Input Teks", desc: "Pasien menulis diary" },
+              { icon: Filter, label: "Preprocessing", desc: "Tokenisasi & stemming" },
+              { icon: BarChart3, label: "TF-IDF", desc: "Ekstraksi fitur kata" },
+              { icon: BrainCircuit, label: "Naive Bayes", desc: "Klasifikasi probabilistik" },
+              { icon: CheckCircle2, label: "Hasil Emosi", desc: "Label emosi terdeteksi" },
+            ].map((step, i, arr) => (
               <div key={step.label} className="flex items-center">
-                <div className="flex flex-col items-center text-center w-28 sm:w-36">
-                  <div className="mb-2 flex h-12 w-12 items-center justify-center rounded-2xl bg-hero-gradient text-primary-foreground shadow-lg">
-                    <step.icon className="h-5 w-5" />
+                <div className="flex w-32 flex-col items-center text-center sm:w-36">
+                  <div className="mb-2 flex h-14 w-14 items-center justify-center rounded-2xl bg-hero-gradient text-primary-foreground shadow-lg">
+                    <step.icon className="h-6 w-6" />
                   </div>
                   <span className="text-xs font-bold uppercase tracking-wider text-foreground">
                     {step.label}
                   </span>
+                  <span className="mt-0.5 text-[11px] text-muted-foreground">
+                    {step.desc}
+                  </span>
                 </div>
-                {i < steps.length - 1 && (
+                {i < arr.length - 1 && (
                   <div className="hidden h-0.5 w-8 bg-border sm:block" />
                 )}
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* About System */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <div className="mb-12 text-center">
+            <h2 className="text-3xl font-bold text-foreground md:text-4xl">
+              Tentang Sistem
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
+              Sistem ini dirancang untuk mendukung monitoring kesehatan mental secara transparan dan dapat dijelaskan.
+            </p>
+          </div>
+          <div className="mx-auto grid max-w-4xl gap-6 md:grid-cols-2">
+            <Card className="border-border/50 shadow-card transition-all duration-300 hover:shadow-card-hover">
+              <CardContent className="p-6 space-y-3">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent text-secondary">
+                  <Target className="h-5 w-5" />
+                </div>
+                <h3 className="text-lg font-semibold text-foreground">Tujuan Sistem</h3>
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  Mengklasifikasikan emosi dari teks diary pasien secara otomatis
+                  menggunakan algoritma Naive Bayes Classifier, sehingga psikolog
+                  dapat memantau kondisi emosional pasien dan memberikan intervensi
+                  tepat waktu.
+                </p>
+              </CardContent>
+            </Card>
+            <Card className="border-border/50 shadow-card transition-all duration-300 hover:shadow-card-hover">
+              <CardContent className="p-6 space-y-3">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent text-secondary">
+                  <ShieldCheck className="h-5 w-5" />
+                </div>
+                <h3 className="text-lg font-semibold text-foreground">Explainable AI</h3>
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  Berbeda dengan model black-box, Naive Bayes memberikan transparansi
+                  penuh. Setiap prediksi dapat ditelusuri melalui distribusi probabilitas
+                  tiap kelas emosi, sehingga hasil klasifikasi dapat dipertanggungjawabkan
+                  secara akademis.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Two Roles Section */}
+      <section className="bg-muted/50 py-20">
+        <div className="container mx-auto px-4">
+          <div className="mb-12 text-center">
+            <h2 className="text-3xl font-bold text-foreground md:text-4xl">
+              Dua Peran, Satu Tujuan
+            </h2>
+            <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
+              Platform dirancang untuk mendukung kolaborasi antara pasien dan
+              psikolog dalam monitoring kesehatan mental.
+            </p>
+          </div>
+
+          <div className="grid gap-8 lg:grid-cols-2">
+            {/* Patient Card */}
+            <Card className="border-border/50 shadow-card overflow-hidden">
+              <div className="bg-hero-gradient px-6 py-4">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/20">
+                    <UserCircle className="h-5 w-5 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-white">
+                      Untuk Pasien
+                    </h3>
+                    <p className="text-sm text-white/80">
+                      Ekspresikan perasaan & pantau emosi Anda
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <CardContent className="space-y-4 p-6">
+                {patientFeatures.map((f) => (
+                  <div key={f.title} className="flex items-start gap-3">
+                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-accent text-secondary">
+                      <f.icon className="h-4 w-4" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-foreground">
+                        {f.title}
+                      </p>
+                      <p className="text-xs leading-relaxed text-muted-foreground">
+                        {f.desc}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+
+            {/* Psychologist Card */}
+            <Card className="border-border/50 shadow-card overflow-hidden">
+              <div className="bg-gradient-to-r from-violet-600 to-indigo-600 px-6 py-4">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/20">
+                    <Stethoscope className="h-5 w-5 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-white">
+                      Untuk Psikolog
+                    </h3>
+                    <p className="text-sm text-white/80">
+                      Monitor & beri intervensi tepat waktu
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <CardContent className="space-y-4 p-6">
+                {psychologistFeatures.map((f) => (
+                  <div key={f.title} className="flex items-start gap-3">
+                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-violet-100 text-violet-600 dark:bg-violet-900/30 dark:text-violet-400">
+                      <f.icon className="h-4 w-4" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-foreground">
+                        {f.title}
+                      </p>
+                      <p className="text-xs leading-relaxed text-muted-foreground">
+                        {f.desc}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
@@ -187,19 +362,19 @@ export default function HomePage() {
           <Card className="overflow-hidden border-0 bg-hero-gradient shadow-lg">
             <CardContent className="flex flex-col items-center gap-6 p-10 text-center md:p-16">
               <h2 className="text-2xl font-bold text-primary-foreground md:text-3xl">
-                Siap Menganalisis Emosi Teks?
+                Siap Memulai Monitoring Kesehatan Mental?
               </h2>
               <p className="max-w-lg text-sm leading-relaxed text-primary-foreground/80">
-                Masukkan teks media sosial dan lihat bagaimana sistem mengklasifikasikan emosi
-                secara transparan menggunakan Naive Bayes Classifier.
+                Daftar sekarang sebagai pasien atau psikolog dan mulai gunakan
+                platform EmotionSense AI untuk monitoring emosi berbasis AI.
               </p>
               <Button
                 size="lg"
                 asChild
                 className="bg-card text-foreground shadow-lg hover:bg-card/90"
               >
-                <Link href="/klasifikasi">
-                  Mulai Sekarang
+                <Link href="/login">
+                  Daftar Sekarang
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
